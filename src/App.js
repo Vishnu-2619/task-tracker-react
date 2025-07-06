@@ -1,4 +1,4 @@
-// React Task Tracker with Human-Like Final Polish, Comments, and Realistic Code Structure
+// React Task Tracker with Full Edit Mode: Title, Description, Priority, Due Date
 
 import React, { useState, useEffect } from 'react';
 import './styles/App.css';
@@ -12,8 +12,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [editTaskId, setEditTaskId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
+  const [editDesc, setEditDesc] = useState('');
+  const [editPriority, setEditPriority] = useState('Low');
+  const [editDueDate, setEditDueDate] = useState('');
 
-  // Load tasks when username is available
   useEffect(() => {
     if (username) {
       const savedTasks = JSON.parse(localStorage.getItem(`tasks_${username}`)) || [];
@@ -21,14 +23,12 @@ function App() {
     }
   }, [username]);
 
-  // Save tasks to localStorage when tasks change
   useEffect(() => {
     if (username) {
       localStorage.setItem(`tasks_${username}`, JSON.stringify(myTasks));
     }
   }, [myTasks, username]);
 
-  // Toggle full-page dark mode
   useEffect(() => {
     document.body.className = darkMode ? 'dark' : '';
   }, [darkMode]);
@@ -64,10 +64,21 @@ function App() {
   const startEdit = (task) => {
     setEditTaskId(task.id);
     setEditTitle(task.title);
+    setEditDesc(task.description);
+    setEditPriority(task.priority);
+    setEditDueDate(task.dueDate);
   };
 
   const saveEdit = (id) => {
-    setMyTasks(myTasks.map(task => task.id === id ? { ...task, title: editTitle } : task));
+    setMyTasks(myTasks.map(task =>
+      task.id === id ? {
+        ...task,
+        title: editTitle,
+        description: editDesc,
+        priority: editPriority,
+        dueDate: editDueDate
+      } : task
+    ));
     setEditTaskId(null);
   };
 
@@ -128,6 +139,20 @@ function App() {
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
               />
+              <input
+                value={editDesc}
+                onChange={(e) => setEditDesc(e.target.value)}
+              />
+              <select value={editPriority} onChange={(e) => setEditPriority(e.target.value)}>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+              <input
+                type="date"
+                value={editDueDate}
+                onChange={(e) => setEditDueDate(e.target.value)}
+              />
               <button onClick={() => saveEdit(task.id)}>Save</button>
             </>
           ) : (
@@ -152,7 +177,6 @@ function App() {
   );
 }
 
-// Form to Add a New Task
 function TaskForm({ addTask }) {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
