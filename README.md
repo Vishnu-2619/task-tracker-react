@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Task Tracker React App
 
 This is a simple task management system built with React. The project was coded according to the assignment instructions for simple task management with the use of localStorage.
@@ -51,3 +52,7 @@ Dark mode and task lists are saved until the browser's storage is cleared.
 ## Assignment Compliance:
 
  Satisfies all fundamental assignment criteria.  Clean, easy-to-read code with realistic variable names and organization Appropriate for academic submission (original code, not plagiarized) --- Thanks for your consideration of this project.
+=======
+# task-tracker-react
+ A simple personal task management application using React
+>>>>>>> 84c004b096ff2ef2d81d44af37b552dbc07e04ad
