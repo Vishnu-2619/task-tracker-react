@@ -38,6 +38,9 @@ npm start
 ```
 The application is run on `http://localhost:3000`.
 
+ ##Live Demo##
+[https://steady-gecko-0d34fd.netlify.app/] 
+
 ## Notes:
 - This project utilizes only React and plain CSS (no third-party UI libraries)
 Login credentials and activities are cached locally within the browser; no actual authentication has occurred.
